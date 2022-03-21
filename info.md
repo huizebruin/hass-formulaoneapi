@@ -1,5 +1,3 @@
-**Pre-Alpha Release!** 
-
 ## Information:
 Track the status of the current Formula One Champioship!
 
