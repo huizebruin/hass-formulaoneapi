@@ -6,19 +6,18 @@ To display the next race:
 ![Next Race](./next-race.png) 
 ```
 type: markdown
-content: >-
-  {% set nr = states.sensor.formula_one_sensor.attributes.next_race  %} {% if
-  not(nr == None) %}  <h2><img height="20"
-  src="https://www.countries-ofthe-world.com/flags-normal/flag-of-{{nr.Circuit.Location.country}}.png">&nbsp; 
+content: >2-
+   {% set nr = states.sensor.formula_one_sensor.attributes.next_race  %} {% if
+    not(nr == None) %}  <h2><img height="25"
+  src="https://www.countries-ofthe-world.com/flags-normal/flag-of-{{nr.Circuit.Location.country | replace(" ", "-")}}.png">&nbsp; 
   {{ nr.round }} :  {{ nr.raceName }}</h2>
 
-  Local time : {{ as_timestamp(nr.date + ' ' + nr.time) |
-  timestamp_custom("%H:%M on %d-%m-%y ") }}<br>
+    <small>Local time : {{ as_timestamp(nr.date + ' ' + nr.time) |
+    timestamp_custom("%H:%M on %d-%m-%Y") }}</small>
 
-  <a target="_new" href="{{nr.Circuit.url}}">
-    <img width="100%" src="https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/{{nr.Circuit.Location.country}}_Circuit.png.transform/7col/image.png">
-  </a> <br> 
-
+    <a target="_new" href="{{nr.Circuit.url}}">
+      <img width="100%" src="https://www.formula1.com/content/dam/fom-website/2018-redesign-assets/Circuit%20maps%2016x9/{{nr.Circuit.Location.country | replace(" ","_")}}_Circuit.png.transform/7col/image.png">
+    </a> <br> 
   Season: {{nr.season}}<br>
 
   Race nr: {{nr.round}}<br><br>
@@ -31,8 +30,8 @@ content: >-
 
   Date :  {{ as_timestamp(nr.date ) | timestamp_custom("%d-%m-%y ") }} <br>
 
-  Track time : {{ nr.time }}
-
+  Track time : {{ nr.time }} 
+   {{ as_timestamp(nr.time) | timestamp_custom("%H:%M") }}
   <br>
 
   {% endif %}
@@ -43,7 +42,6 @@ card_mod:
       * {
         font-family: FormulaOne, "Titillium Web";
       }
-
 
 
 ```
